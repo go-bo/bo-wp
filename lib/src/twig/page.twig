@@ -1,0 +1,53 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<div class="PageHeader">
+  <h1 class="PageHeader-title">{{post.title}}</h1>
+</div>
+<div class="container">
+  {{post.content}}
+
+  <h2>{{post.get_field('page_intro')}}</h2>
+
+
+  {% for media_item in post.get_field('page_layout') %}
+    
+    {# WSIWYG field #}
+    {% if media_item.acf_fc_layout == '23_full_width_block' %}
+      <div>{{media_item.content}}</div>
+    
+    {# Subehad #}
+    {% elseif media_item.acf_fc_layout == 'subhead_block' %}
+      <h3>{{media_item.headline}}</h3>
+    
+    {# Loop #}
+    {% elseif media_item.acf_fc_layout == 'secondary_block_single' %}
+
+      <div>{{media_item.secondary_block_single_content}}</div>
+
+    {% elseif media_item.acf_fc_layout == 'secondary_block_2_up' %}
+      <div>{{media_item.secondary_block_content_1}}</div>
+      <div>{{media_item.secondary_block_content_2}}</div>
+
+    {% elseif media_item.acf_fc_layout == 'team_grid' %}
+      <h1>team grid</h1>
+      {% for member in team_members %}
+        <div>
+          <h3>{{member.title}}</h3>
+          <h5>{{member.position}}</h5>
+          <p>{{member.bio}}</p>
+          <a href="#">{{member.contact_email}}</a>
+        </div>
+      {% endfor %}
+
+    {% endif %}
+
+  {% endfor %}
+
+
+
+  {# % include 'partials/Overlays.twig' % #}
+  {# {submit_resume.content} #}
+
+</div>
+{% endblock %}

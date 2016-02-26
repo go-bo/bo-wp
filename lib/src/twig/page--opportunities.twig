@@ -1,0 +1,24 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<div class="PageHeader">
+  <h1 class="PageHeader-title">{{title}}</h1>
+    <h4>Position Type</h4>
+    <ul>
+      {% for type in position_types %}
+        <li><a href="{{type.link}}">{{type.name}}</a></li>
+      {% endfor %}
+    </ul>
+</div>
+<div class="container">
+  
+  {% for post in posts %}
+    <h3>{{post.title}}</h3>
+    {% for term in post.terms('opportunity_type') %}
+    <p>{{term.name}}</p>
+    {% endfor %}
+    {{post.get_field('opportunity_key_points')}}
+  {% endfor %}
+
+</div>
+{% endblock %}

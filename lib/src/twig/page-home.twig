@@ -1,0 +1,16 @@
+
+{% extends "base.twig" %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="page-title">I'm home</h1>
+    <div>
+      {{post.get_field('clients_blurb')}}
+      {{post.get_field('clients_link')}}
+    </div>
+    <div>
+      {{post.get_field('candidates_blurb')}}
+      {{post.get_field('candidates_link')}}
+    </div>
+  </div>
+{% endblock %}
